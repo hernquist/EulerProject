@@ -16,6 +16,7 @@ def test_for_prime(num)
 end
 
 j = 2
+
 while j < loop_max
 	if x % j == 0
 	  if test_for_prime ((x / j).to_i) 
