@@ -1,5 +1,0 @@
-x = 600851475143
-x = Math.sqrt(9)
-puts x
-for i in 2..10
-end
