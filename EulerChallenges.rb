@@ -411,13 +411,96 @@ end
 # problem 15 
 #-----------
 
+def sum_of_the_digits(num)
+	num.to_s.chars.map(&:to_i).reduce(:+)
+end
 
-#def sum_of_the_digits(num)
-	#num.to_s.chars.map(&:to_i).reduce(:+)
-	puts (2**1000).to_s.chars.map(&:to_i).reduce(:+)
+sum_of_the_digits(2**1000)
 
-#end
-#sum_of_the_digits(2**1000)
+#-----------------------------------------------------------------------------------
+# problem 18 
+#-----------
+
+def makeBinStr (length, num)
+	binStr = ""
+	temp_num = num
+
+	for j in (0..length - 1)
+		if temp_num >= 2**(length - 1 - j) 
+			temp_num -= 2**(length - 1 - j)
+			binStr = binStr + "Y"
+		else
+			binStr = binStr + "N"
+		end
+	end
+	binStr
+end
+
+def makeBinStrArrays(length, array_possibilities)
+	for i in (0..(2**length-1))
+		x = makeBinStr(length, i)
+		array_possibilities[i] = x
+		puts "#{i} | #{array_possibilities[i]}"
+	end
+	return array_possibilities
+end
+
+def prob18
+	a = []
+	array_possibilities = []
+
+	a[0] =	75
+	a[1] =	95, 64
+	a[2] =	17, 47, 82
+	a[3] =	18, 35, 87, 10
+	a[4] =	20,  4, 82, 47, 65
+	a[5] =	19,  1, 23, 75,  3, 34
+	a[6] =	88,  2, 77, 73,  7, 63, 67
+	a[7] =	99, 65,  4, 28,  6, 16, 70, 92
+	a[8] =	41, 41, 26, 56, 83, 40, 80, 70, 33
+	a[9] =	41, 48, 72, 33, 47, 32, 37, 16, 94, 29
+	a[10] =	53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14
+	a[11] =	70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57
+	a[12] =	91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48
+	a[13] =	63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31
+	a[14] =	 4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23
+
+	length = 14
+	x = makeBinStrArrays(length, array_possibilities)
+  for i in 0..(2**length) - 1
+  	puts "#{i} | #{x[i]}"
+  end
+
+	highest_sum = 0
+
+	for i in (0..((2**length) - 1))
+		temp = a[0]
+		print a[0]
+		counter = 0
+		tempStr = x[i]
+		for j in (1..length)
+			if tempStr[j] == "Y"
+				counter += 1
+				temp += a[j][counter]
+				print " + #{a[j][counter]}"
+			else
+				temp += a[j][counter]
+				print " + #{a[j][counter]}"
+			end
+		end
+		puts "*** #{i} | #{tempStr} | #{temp}"
+		if temp > highest_sum
+			highest_sum = temp
+			puts "Highest sum #{i} | #{tempStr} | #{highest_sum}"
+		end
+	end
+	puts "#{highest_sum}"
+end
+
+prob18
+		
+
+				 
 
 
 
