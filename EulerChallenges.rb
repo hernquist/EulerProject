@@ -497,7 +497,68 @@ def prob18
 	puts "#{highest_sum}"
 end
 
-prob18
+#-----------------------------------------------------------------------------------
+# problem 20 
+#-----------
+
+def prob20
+	product = 1	
+	for i in (1..100)
+		product *= i
+	end
+	puts sum_of_the_digits(product)
+end
+
+#-----------------------------------------------------------------------------------
+# problem 21 
+#-----------
+
+def prob21
+	array = format_array(10000)
+  sum = check_amicable_number(array)
+  puts sum
+end
+
+def sum_of_the_factors(number)
+	sum = 0;
+	for i in (1..Math.sqrt(number).to_i)
+		if (number % i === 0) 
+			sum += i	
+			sum += number / i
+		end
+	end
+	sum
+end
+
+def modified_factor_sum (number)
+ 	sum_of_the_factors(number) - number
+end
+
+def format_array(array_size)
+  array = []
+  for i in (1..array_size)
+		array[i] = modified_factor_sum(i)
+    # puts "#{i} | #{array[i]}"
+	end
+  array
+end
+
+def check_amicable_number(array)
+  sum = 0
+  for i in (1..array.length - 1)
+    if (array[array[i]] === i) && (i != array[i])
+      sum += array[i]
+      puts "#{i} | #{array[i]} and #{array[i]} | #{array[array[i]]}"
+    end
+  end
+  sum
+end
+
+prob21
+
+
+
+
 		
 
 				 
